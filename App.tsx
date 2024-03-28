@@ -31,6 +31,13 @@ type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
+//Props for Grid Buttons
+type ButtonProps = {
+  onOrOff: string;
+  name: string;
+  room_location: string;
+}
+
 function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
