@@ -27,15 +27,22 @@ import {
 
 const test = "test";
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+
 
 //Props for Grid Buttons
 type ButtonProps = {
   onOrOff: string;
   name: string;
   room_location: string;
+}
+
+//Blueprint for Grid buttons
+const GridBox = (props: ButtonProps) => {
+  return(<View>
+    <Text>{props.onOrOff}</Text>
+    <Text>{props.name}</Text>
+    <Text>{props.room_location}</Text>
+  </View>)
 }
 
 function Section({children, title}: SectionProps): React.JSX.Element {
