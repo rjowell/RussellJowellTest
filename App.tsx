@@ -25,6 +25,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+const test = "test";
+
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
