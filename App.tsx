@@ -6,27 +6,29 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
+
 import {
   Image,
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const lightbulbImageString = './lightbulb.png';
+const raindropString = './whiteRaindrop.png';
+const cloudImageString = './cloud.png';
 
-const test = "test";
+//Data for Switch Grid Buttons
+const switchData = [
+  {onOrOff:"On",name:"Switch 1.1",room_location:"Living Room"},
+  {onOrOff:"On",name:"Switch 1.2",room_location:"Dining Room"},
+  {onOrOff:"Off",name:"Switch 1.3",room_location:"Front Door"},
+  {onOrOff:"Off",name:"Switch 1.4",room_location:"Master Bathroom"},
+  {onOrOff:"On",name:"Switch 1.5",room_location:"Bedroom 1"},
+  {onOrOff:"On",name:"Switch 1.6",room_location:"Bedroom 2"},
+  {onOrOff:"On",name:"Switch 1.7",room_location:"Master Bedroom"},
+  {onOrOff:"On",name:"Switch 1.8",room_location:"Garage"}];
 
 
 
@@ -53,41 +55,41 @@ type SeparatorBarName = {
 //Component for separator bar
 const SeparatorBar = (props:SeparatorBarName) => {
   return(
-    <View style={{width:'90%',flexDirection:'row',justifyContent:'space-between'}}>
-      <Text style={styles.separatorBar}>{props.title}</Text>
-      <Text style={styles.separatorBar}>+</Text>
+    <View style={styles.separatorBar}>
+      <Text style={styles.separatorBarText}>{props.title}</Text>
+      <Text style={styles.separatorBarText}>+</Text>
     </View>
   )
 }
 
 //Component for Switch Grid buttons
 const GridBox = (props: ButtonProps) => {
-  return(<View style={styles.item}>
+  return(<View style={styles.gridBox}>
     <View style={styles.gridBoxTop}>
-    <Image style={{height:30,width:30}} source={require('./lightbulb.png')}/>
-    <Text>{props.onOrOff}</Text>
+    <Image style={{height:30,width:30}} source={require(lightbulbImageString)}/>
+    <Text style={{color:'white'}}>{props.onOrOff}</Text>
     </View>
     <View>
-    <Text>{props.name}</Text>
-    <Text>{props.room_location}</Text>
+    <Text style={{color:'white',fontWeight:'bold'}}>{props.name}</Text>
+    <Text style={{fontStyle:'italic',color:'white'}}>{props.room_location}</Text>
     </View>
   </View>)
 }
 //Component for top Weather Data
 const WeatherBox = (props: WeatherProps) => {
   return(
-  <View style={{width:'75%',flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginBottom:20,marginTop:20}}>
+  <View style={styles.weatherBox}>
     <View>
-    <Text style={{fontWeight:'bold',fontSize:25}}>{props.cityName}</Text>
-    <Text style={{fontSize:50}}>{props.temperature}</Text>
+    <Text style={{fontWeight:'bold',fontSize:25,color:'white'}}>{props.cityName}</Text>
+    <Text style={{fontSize:50,color:'white'}}>{props.temperature}</Text>
     <View style={{flexDirection:"row",alignItems:'center'}}>
-    <Image style={{height:18,width:12,marginRight:5}} source={require('./raindrop_black.png')}/>
-    <Text style={{fontSize:20}}>{props.rainChance}</Text>
+    <Image style={{height:18,width:12,marginRight:5}} source={require(raindropString)}/>
+    <Text style={{fontSize:20,color:'white',fontWeight:'bold'}}>{props.rainChance}</Text>
     </View>
     </View>
     <View style={{flexDirection:'column',alignItems:'center'}}>
-      <Image style={{height:35,width:55}} source={require('./cloud.png')}/>
-    <Text style={{fontSize:20,fontWeight:'bold'}}>{props.cloudConditions}</Text>
+      <Image style={{height:35,width:55,marginBottom:10}} source={require(cloudImageString)}/>
+    <Text style={{fontSize:20,fontWeight:'bold',color:'white'}}>{props.cloudConditions}</Text>
     </View>
   </View>)
 
@@ -95,23 +97,14 @@ const WeatherBox = (props: WeatherProps) => {
 
 //Blueprint
 
-//Data for Switch Grid Buttons
-const switchData = [
-{onOrOff:"On",name:"Switch 1.1",room_location:"Living Room"},
-{onOrOff:"On",name:"Switch 1.2",room_location:"Dining Room"},
-{onOrOff:"Off",name:"Switch 1.3",room_location:"Front Door"},
-{onOrOff:"Off",name:"Switch 1.4",room_location:"Master Bathroom"},
-{onOrOff:"On",name:"Switch 1.5",room_location:"Bedroom 1"},
-{onOrOff:"On",name:"Switch 1.6",room_location:"Bedroom 2"},
-{onOrOff:"On",name:"Switch 1.7",room_location:"Master Bedroom"},
-{onOrOff:"On",name:"Switch 1.8",room_location:"Garage"}]
+
 
 function App(): React.JSX.Element {
   
 
   return (
     
-    <SafeAreaView style={{alignItems:'center',alignSelf:'center',flexDirection:'column',justifyContent:'space-between'}}>
+    <SafeAreaView style={styles.app}>
       <WeatherBox cloudConditions='Partly Cloudy' cityName='Houston' temperature='50°F' rainChance='45%'/>
       <SeparatorBar title='Favorite Scenes'/>
       <Text>{"\n"}</Text>
@@ -126,21 +119,48 @@ function App(): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  item: {
+  weatherBox:{
+    width:'75%',
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between',
+    marginBottom:20,
+    marginTop:17},
+  app:{
+    backgroundColor:'#303787',
+    width:'100%',
+    height:'100%',
+    alignItems:'center',
+    alignSelf:'center',
+    flexDirection:'column',
+    justifyContent:'space-between'
+  },
+  gridBox: {
     flex:1,
     padding:5,
     margin:5,
     minWidth:100,
+    borderRadius:4,
     maxWidth:100,
     height:100,
-    backgroundColor:'rgba(50,50,50,0.1)',
+    backgroundColor:'rgba(150,150,150,0.5)',
     flexDirection:'column',
     justifyContent:'space-between'
     
   },
-  separatorBar:{
+  separatorBarText:{
     fontWeight:'bold',
-    fontSize:17
+    fontSize:17,
+    color:'white'
+  },
+  separatorBar:{
+    marginTop:8,
+    marginBottom:8,
+    width:'100%',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    backgroundColor:'rgba(150,150,150,0.2)',
+    
   },
   switchGrid: {
     flexDirection:"row",
