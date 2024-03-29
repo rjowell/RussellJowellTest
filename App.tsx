@@ -36,99 +36,66 @@ type ButtonProps = {
   room_location: string;
 }
 
+//Props for WX component
+type WeatherProps = {
+  cityName: string;
+  temperature: string;
+  rainChance: string;
+  cloudConditions: string;
+
+}
+
 //Blueprint for Grid buttons
 const GridBox = (props: ButtonProps) => {
-  return(<View>
+  return(<View style={styles.item}>
     <Text>{props.onOrOff}</Text>
     <Text>{props.name}</Text>
     <Text>{props.room_location}</Text>
   </View>)
 }
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
+const WeatherBox = (props:WeatherProps) => {
+
 }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+//Data for Switch Grid Buttons
+const switchData = [
+{onOrOff:"On",name:"Switch 1.1",room_location:"Living Room"},
+{onOrOff:"On",name:"Switch 1.2",room_location:"Dining Room"},
+{onOrOff:"Off",name:"Switch 1.3",room_location:"Front Door"},
+{onOrOff:"Off",name:"Switch 1.4",room_location:"Master Bathroom"},
+{onOrOff:"On",name:"Switch 1.5",room_location:"Bedroom 1"},
+{onOrOff:"On",name:"Switch 1.6",room_location:"Bedroom 2"},
+{onOrOff:"On",name:"Switch 1.7",room_location:"Master Bedroom"},
+{onOrOff:"On",name:"Switch 1.8",room_location:"Garage"}]
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+function App(): React.JSX.Element {
+  
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+    <SafeAreaView style={styles.app}>
+      <Text>City Name</Text>
+      <Text>100C</Text>
+      <Text></Text>
+      {switchData.map((item)=>{return <GridBox name={item.name} onOrOff={item.onOrOff} room_location={item.room_location}/>})}
+      <GridBox onOrOff='On' name='Switch 1' room_location='living room'/>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  item: {
+    flex:1,
+    minWidth:100,
+    maxWidth:100,
+    height:100,
+    backgroundColor:'rgba(50,50,50,0.1)',
+    
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+  app: {
+    flexDirection:"row",
+    flexWrap:"wrap"
+  }
 });
 
 export default App;
