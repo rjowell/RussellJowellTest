@@ -62,12 +62,19 @@ const GridBox = (props: ButtonProps) => {
 //Blueprint for top Weather Data
 const WeatherBox = (props: WeatherProps) => {
   return(
-  <View>
-    <Text>{props.cityName}</Text>
-    <Text>{props.temperature}</Text>
-    <Image style={{height:30,width:30}} source={require('./raindrop.png')}/>
-    <Text>{props.rainChance}</Text>
-    <Text>{props.cloudConditions}</Text>
+  <View style={{width:'75%',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+    <View>
+    <Text style={{fontWeight:'bold',fontSize:25}}>{props.cityName}</Text>
+    <Text style={{fontSize:50}}>{props.temperature}</Text>
+    <View style={{flexDirection:"row",alignItems:'center'}}>
+    <Image style={{height:18,width:12,marginRight:5}} source={require('./raindrop_black.png')}/>
+    <Text style={{fontSize:20}}>{props.rainChance}</Text>
+    </View>
+    </View>
+    <View style={{flexDirection:'column',alignItems:'center'}}>
+      <Image style={{height:35,width:55}} source={require('./cloud.png')}/>
+    <Text style={{fontSize:20,fontWeight:'bold'}}>{props.cloudConditions}</Text>
+    </View>
   </View>)
 
 }
@@ -90,8 +97,8 @@ function App(): React.JSX.Element {
 
   return (
     
-    <SafeAreaView style={{}}>
-      <WeatherBox cloudConditions='Partly' cityName='Houston' temperature='50' rainChance='45%'/>
+    <SafeAreaView style={{alignItems:'center'}}>
+      <WeatherBox cloudConditions='Partly Cloudy' cityName='Houston' temperature='50°F' rainChance='45%'/>
       <View style={styles.switchGrid}>
       
       {switchData.map((item)=>{return <GridBox name={item.name} onOrOff={item.onOrOff} room_location={item.room_location}/>})}
