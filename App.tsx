@@ -46,7 +46,21 @@ type WeatherProps = {
 
 }
 
-//Blueprint for Grid buttons
+type SeparatorBarName = {
+  title:string;
+}
+
+//Component for separator bar
+const SeparatorBar = (props:SeparatorBarName) => {
+  return(
+    <View style={{width:'90%',flexDirection:'row',justifyContent:'space-between'}}>
+      <Text style={styles.separatorBar}>{props.title}</Text>
+      <Text style={styles.separatorBar}>+</Text>
+    </View>
+  )
+}
+
+//Component for Switch Grid buttons
 const GridBox = (props: ButtonProps) => {
   return(<View style={styles.item}>
     <View style={styles.gridBoxTop}>
@@ -59,10 +73,10 @@ const GridBox = (props: ButtonProps) => {
     </View>
   </View>)
 }
-//Blueprint for top Weather Data
+//Component for top Weather Data
 const WeatherBox = (props: WeatherProps) => {
   return(
-  <View style={{width:'75%',flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+  <View style={{width:'75%',flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginBottom:20,marginTop:20}}>
     <View>
     <Text style={{fontWeight:'bold',fontSize:25}}>{props.cityName}</Text>
     <Text style={{fontSize:50}}>{props.temperature}</Text>
@@ -97,8 +111,12 @@ function App(): React.JSX.Element {
 
   return (
     
-    <SafeAreaView style={{alignItems:'center'}}>
+    <SafeAreaView style={{alignItems:'center',alignSelf:'center',flexDirection:'column',justifyContent:'space-between'}}>
       <WeatherBox cloudConditions='Partly Cloudy' cityName='Houston' temperature='50°F' rainChance='45%'/>
+      <SeparatorBar title='Favorite Scenes'/>
+      <Text>{"\n"}</Text>
+      <Text>{"\n"}</Text>
+      <SeparatorBar title='Favorite Devices'/>
       <View style={styles.switchGrid}>
       
       {switchData.map((item)=>{return <GridBox name={item.name} onOrOff={item.onOrOff} room_location={item.room_location}/>})}
@@ -119,6 +137,10 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     justifyContent:'space-between'
     
+  },
+  separatorBar:{
+    fontWeight:'bold',
+    fontSize:17
   },
   switchGrid: {
     flexDirection:"row",
