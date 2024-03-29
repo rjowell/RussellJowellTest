@@ -4,6 +4,6 @@ VERSIONS:
 React Native: 9.1.1
 Node: 21.7.1
 
-TO RUN:
-cd - RussellJowellTest
+TO RUN:  
+cd - RussellJowellTest  
 npx react-native run-ios
