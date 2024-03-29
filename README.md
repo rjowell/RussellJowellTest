@@ -6,7 +6,7 @@ Node: 21.7.1
 
 TO RUN:  
 Clone the Repo  
-cd ios
-pod install
+cd ios  
+pod install  
 cd - RussellJowellTest  
 npx react-native run-ios
