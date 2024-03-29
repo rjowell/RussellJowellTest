@@ -8,6 +8,7 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -48,15 +49,30 @@ type WeatherProps = {
 //Blueprint for Grid buttons
 const GridBox = (props: ButtonProps) => {
   return(<View style={styles.item}>
+    <View style={styles.gridBoxTop}>
+    <Image style={{height:30,width:30}} source={require('./lightbulb.png')}/>
     <Text>{props.onOrOff}</Text>
+    </View>
+    <View>
     <Text>{props.name}</Text>
     <Text>{props.room_location}</Text>
+    </View>
   </View>)
 }
-
-const WeatherBox = (props:WeatherProps) => {
+//Blueprint for top Weather Data
+const WeatherBox = (props: WeatherProps) => {
+  return(
+  <View>
+    <Text>{props.cityName}</Text>
+    <Text>{props.temperature}</Text>
+    <Image style={{height:30,width:30}} source={require('./raindrop.png')}/>
+    <Text>{props.rainChance}</Text>
+    <Text>{props.cloudConditions}</Text>
+  </View>)
 
 }
+
+//Blueprint
 
 //Data for Switch Grid Buttons
 const switchData = [
@@ -73,12 +89,13 @@ function App(): React.JSX.Element {
   
 
   return (
-    <SafeAreaView style={styles.app}>
-      <Text>City Name</Text>
-      <Text>100C</Text>
-      <Text></Text>
+    
+    <SafeAreaView style={{}}>
+      <WeatherBox cloudConditions='Partly' cityName='Houston' temperature='50' rainChance='45%'/>
+      <View style={styles.switchGrid}>
+      
       {switchData.map((item)=>{return <GridBox name={item.name} onOrOff={item.onOrOff} room_location={item.room_location}/>})}
-      <GridBox onOrOff='On' name='Switch 1' room_location='living room'/>
+      </View>
     </SafeAreaView>
   );
 }
@@ -86,15 +103,24 @@ function App(): React.JSX.Element {
 const styles = StyleSheet.create({
   item: {
     flex:1,
+    padding:5,
+    margin:5,
     minWidth:100,
     maxWidth:100,
     height:100,
     backgroundColor:'rgba(50,50,50,0.1)',
+    flexDirection:'column',
+    justifyContent:'space-between'
     
   },
-  app: {
+  switchGrid: {
     flexDirection:"row",
     flexWrap:"wrap"
+  },
+  gridBoxTop:
+  {
+    flexDirection:"row",
+    justifyContent:'space-between'
   }
 });
 
